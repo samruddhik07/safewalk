@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const IncidentSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  userId: { type: String, required: true }, 
   type: String,
   description: String,
   verified: { type: Boolean, default: false },

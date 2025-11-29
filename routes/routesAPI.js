@@ -1,3 +1,4 @@
+
 const express = require('express');
 const { calculateRoute } = require('../utils/tomtomClient');
 const { computeSafetyScore } = require('../utils/safetyScore');
@@ -15,14 +16,14 @@ router.post('/safe', async (req, res) => {
     // 1️⃣ Get simplified route from TomTom client
     const route = await calculateRoute(start, end);
 
-    // 2️⃣ Compute safety score for this route
-    const score = computeSafetyScore(route);
+    // 2️⃣ Compute safety score (⚠️ ADDED await HERE)
+    const score = await computeSafetyScore(route);
 
     // 3️⃣ Send final response
     res.json({
       bestRouteId: `route-${Date.now()}`,
       route,
-      safetyMeta: { score },
+      safetyMeta: { score }, // Now this will be a number, not a Promise
       tilesToCache: []
     });
 
