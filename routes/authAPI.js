@@ -48,5 +48,28 @@ router.get('/me', async (req, res) => {
     res.status(401).json({ error: 'invalid token' });
   }
 });
+// PUT /auth/contacts - Update Emergency Contacts
+router.put('/contacts', async (req, res) => {
+  try {
+    const { userId, contacts } = req.body;
+
+    if (!userId || !contacts) {
+      return res.status(400).json({ error: "Missing userId or contacts" });
+    }
+
+    // Find User and Update the contacts array
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { emergencyContacts: contacts },
+      { new: true } // Return the updated document
+    );
+
+    res.json({ status: 'ok', user: updatedUser });
+
+  } catch (err) {
+    console.error("Contact Update Error:", err);
+    res.status(500).json({ error: "Failed to update contacts" });
+  }
+});
 
 module.exports = router;
