@@ -34,7 +34,7 @@ router.post('/offline', async (req, res) => {
         timestamp: item.timestamp || new Date(),
         location: {
           type: "Point",
-          // ⚠️ IMPORTANT: MongoDB uses [Longitude, Latitude]
+        
           coordinates: [parseFloat(item.lon), parseFloat(item.lat)] 
         }
       });
@@ -62,8 +62,7 @@ router.post('/offline', async (req, res) => {
 // (Optional: If you want to see what needs syncing)
 // ------------------------------------------------------
 router.get('/pending', async (req, res) => {
-  // For a hackathon, we usually handle the queue on Frontend (LocalStorage)
-  // So this endpoint is just a placeholder.
+ 
   res.json({ status: "ok", message: "Sync logic is handled client-side" });
 });
 

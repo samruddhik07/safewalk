@@ -14,6 +14,8 @@ const syncApi = require('./routes/syncAPI');
 const sosApi = require('./routes/sosAPI');
 const authApi = require('./routes/authAPI');
 const incidentApi = require('./routes/incidentAPI');
+const safetyRoutes = require('./routes/safetyAPI');
+
 
 const app = express();
 app.use(cors());
@@ -24,6 +26,7 @@ app.use('/routes', routesApi);
 app.use('/incident', incidentApi);
 app.use('/sos', sosApi);
 app.use('/sync', syncApi);
+app.use('/safety', safetyRoutes);
 
 app.get('/', (req, res) => res.send('SafeWalk backend running'));
 
