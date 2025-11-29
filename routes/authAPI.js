@@ -49,26 +49,31 @@ router.get('/me', async (req, res) => {
   }
 });
 // PUT /auth/contacts - Update Emergency Contacts
+// PUT /auth/contacts -> Save Emergency Contacts
 router.put('/contacts', async (req, res) => {
   try {
     const { userId, contacts } = req.body;
 
-    if (!userId || !contacts) {
-      return res.status(400).json({ error: "Missing userId or contacts" });
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
     }
 
-    // Find User and Update the contacts array
+    // Find the user by ID and update the emergencyContacts array
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { emergencyContacts: contacts },
-      { new: true } // Return the updated document
+      { new: true } // This makes it return the updated data
     );
 
-    res.json({ status: 'ok', user: updatedUser });
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ status: "ok", user: updatedUser });
 
   } catch (err) {
-    console.error("Contact Update Error:", err);
-    res.status(500).json({ error: "Failed to update contacts" });
+    console.error("Save Contacts Error:", err);
+    res.status(500).json({ error: "Server error saving contacts" });
   }
 });
 
