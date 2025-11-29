@@ -56,8 +56,13 @@ io.on('connection', socket => {
 
 // Make io accessible to routes via app.locals
 app.locals.io = io;
+const DB_URL = process.env.MONGO_URI;
 
-mongoose.connect(process.env.MONGO_URI || '', { useNewUrlParser: true, useUnifiedTopology: true })
+if (!DB_URL) {
+    console.error(" FATAL ERROR: MONGO_URI is missing in .env file!");
+}
+
+mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
