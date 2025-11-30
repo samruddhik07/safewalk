@@ -1,0 +1,7 @@
+{
+  "name": "SafeWalk Premium",
+  "description": "A comprehensive route safety companion app helping users find the safest paths, report incidents, and manage emergency contacts.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

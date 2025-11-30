@@ -1,0 +1,89 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+/* 🌍 Map Container Perspective */
+.map-perspective-container {
+  perspective: 1000px; /* Creates the 3D depth */
+  background-color: #0f172a; /* Dark background so it doesn't look broken if map loads slow */
+}
+
+/* 🚶‍♂ Standard 2D View */
+.map-standard-view {
+  transform: rotateX(0deg) scale(1);
+  transition: transform 1s ease-in-out;
+}
+
+/* 🧭 3D Navigation View (The "Google Maps" look) */
+/* 🧭 3D Navigation View - UPDATED */
+.map-3d-view {
+  transform: rotateX(45deg) scale(1.5) translateY(-20%);
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  
+  /* 🔥 FIXES: Force GPU Rendering to stop flickering */
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+  will-change: transform;
+}
+
+/* Ensure tiles don't get clipped */
+.leaflet-tile-pane {
+  transform-style: preserve-3d;
+  z-index: 0;
+}
+
+/* 📍 Fix Leaflet Controls in 3D Mode */
+.leaflet-control-container {
+  transform: translateZ(0); /* Keeps buttons flat */
+}
+
+/* 🕶 Hide Scrollbars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(156, 163, 175, 0.5);
+  border-radius: 20px;
+}
